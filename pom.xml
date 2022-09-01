@@ -161,7 +161,7 @@
                                 <!--<value>t_user</value>-->
                             </includeTables>
                             <excludeTables>
-                                <!--<value>t_user</value>-->
+                                <value>t_example</value>
                             </excludeTables>
                             <features>
                                 <value>MyBatisPlusFieldAnnotationFeature</value>
@@ -189,6 +189,9 @@
                             <includeTables>
                                 <!--<value>t_user</value>-->
                             </includeTables>
+                            <excludeTables>
+                                <value>t_example</value>
+                            </excludeTables>
                             <features>
                                 <value>IgnoreNullFieldAnnotationFeature</value>
                                 <value>LombokNoArgsConstructorAnnotationFeature</value>
@@ -223,6 +226,9 @@
                             <includeTables>
                                 <!--<value>t_user</value>-->
                             </includeTables>
+                            <excludeTables>
+                                <value>t_example</value>
+                            </excludeTables>
                             <features>
                                 <value>LombokNoArgsConstructorAnnotationFeature</value>
                                 <value>LombokAllArgsConstructorAnnotationFeature</value>
@@ -260,6 +266,9 @@
                             <includeTables>
                                 <!--<value>t_user</value>-->
                             </includeTables>
+                            <excludeTables>
+                                <value>t_example</value>
+                            </excludeTables>
                             <features>
                                 <value>LombokNoArgsConstructorAnnotationFeature</value>
                                 <value>LombokAllArgsConstructorAnnotationFeature</value>
@@ -297,6 +306,9 @@
                             <includeTables>
                                 <!--<value>t_user</value>-->
                             </includeTables>
+                            <excludeTables>
+                                <value>t_example</value>
+                            </excludeTables>
                             <features>
                                 <value>LombokNoArgsConstructorAnnotationFeature</value>
                                 <value>LombokAllArgsConstructorAnnotationFeature</value>
@@ -332,8 +344,6 @@
                             </includeTables>
                             <excludeTables>
                                 <value>t_example</value>
-                                <value>t_doc_ext</value>
-                                <value>t_sys_config</value>
                             </excludeTables>
                             <features>
                             </features>
