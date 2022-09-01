@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>code-generate-template</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Code Generate Template</name>
+    <packaging>jar</packaging>
+    <description>
+        code-generator-plugin的示例模板
+    </description>
+
+    <parent>
+        <groupId>com.github.hetianyi</groupId>
+        <artifactId>springboot-parent</artifactId>
+        <version>2.7.2.3</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <springboot-ready.version>2.7.2.14</springboot-ready.version>
+        <jakarta.validation.version>2.0.2</jakarta.validation.version>
+    </properties>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>com.github.hetianyi</groupId>
+            <artifactId>springboot-ready</artifactId>
+            <version>${springboot-ready.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+            <version>2.13.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${jakarta.validation.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.hetianyi</groupId>
+            <artifactId>code-generator-plugin</artifactId>
+            <version>1.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+    <build>
+        <finalName>app</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+
+            <plugin>
+                <groupId>com.github.hetianyi</groupId>
+                <artifactId>code-generator-plugin</artifactId>
+                <version>1.0.1-SNAPSHOT</version>
+                <configuration>
+                    <database>
+                        <!--<host>10.243.11.194</host>-->
+                        <port>3306</port>
+                        <dbName>test</dbName>
+                        <username>root</username>
+                        <password>123456</password>
+                    </database>
+                    <activeProfiles>
+                        <value>po</value>
+                        <value>vo</value>
+                        <value>create_form</value>
+                        <value>update_form</value>
+                        <value>query_form</value>
+                        <value>template</value>
+                    </activeProfiles>
+
+                    <profiles>
+                        <profile>
+                            <name>po</name>
+                            <outputDir>./generated</outputDir>
+                            <packageName>com.github.hetianyi.plugin.template.model.po</packageName>
+                            <author>Jason He</author>
+                            <appendSuffix>PO</appendSuffix>
+                            <lineSeparator>CRLF</lineSeparator>
+                            <copyright>Copyright (c) 2022, Jason He. All rights reserved.</copyright>
+                            <includeTables>
+                                <!--<value>t_user</value>-->
+                            </includeTables>
+                            <excludeTables>
+                                <!--<value>t_user</value>-->
+                            </excludeTables>
+                            <features>
+                                <value>MyBatisPlusFieldAnnotationFeature</value>
+                                <value>MyBatisPlusClassAnnotationFeature</value>
+                                <value>LombokDataAnnotationFeature</value>
+                                <value>-GetterSetterFeature</value>
+                                <!--<value>config.com.example.Slf4jFeature</value>-->
+                            </features>
+                            <ignorePrefixes>
+                                <value>t_</value>
+                                <value>_</value>
+                            </ignorePrefixes>
+                            <ignoreSuffixes>
+                                <value>_</value>
+                            </ignoreSuffixes>
+                        </profile>
+                        <profile>
+                            <name>vo</name>
+                            <outputDir>./generated</outputDir>
+                            <packageName>com.github.hetianyi.plugin.template.model.vo</packageName>
+                            <author>Jason He</author>
+                            <appendSuffix>VO</appendSuffix>
+                            <lineSeparator>CRLF</lineSeparator>
+                            <copyright>Copyright (c) 2022, Jason He. All rights reserved.</copyright>
+                            <includeTables>
+                                <!--<value>t_user</value>-->
+                            </includeTables>
+                            <features>
+                                <value>IgnoreNullFieldAnnotationFeature</value>
+                                <value>LombokNoArgsConstructorAnnotationFeature</value>
+                                <value>LombokAllArgsConstructorAnnotationFeature</value>
+                                <value>LombokBuilderAnnotationFeature</value>
+                                <value>LombokDataAnnotationFeature</value>
+                                <value>DateFormatAnnotationFeature</value>
+                                <value>ConvertibleFeature</value>
+                                <value>SwaggerApiModelAnnotationFeature</value>
+                                <value>SwaggerApiModelPropertyAnnotationFeature</value>
+                                <value>IdField2StringFeature</value>
+                                <value>-GetterSetterFeature</value>
+                                <!--<value>config.com.example.Slf4jFeature</value>-->
+                            </features>
+                            <ignorePrefixes>
+                                <value>t_</value>
+                                <value>_</value>
+                            </ignorePrefixes>
+                            <ignoreSuffixes>
+                                <value>_</value>
+                            </ignoreSuffixes>
+                        </profile>
+                        <profile>
+                            <name>create_form</name>
+                            <outputDir>./generated</outputDir>
+                            <packageName>com.github.hetianyi.plugin.template.model.form</packageName>
+                            <author>Jason He</author>
+                            <appendPrefix>Create</appendPrefix>
+                            <appendSuffix>Form</appendSuffix>
+                            <lineSeparator>CRLF</lineSeparator>
+                            <copyright>Copyright (c) 2022, Jason He. All rights reserved.</copyright>
+                            <includeTables>
+                                <!--<value>t_user</value>-->
+                            </includeTables>
+                            <features>
+                                <value>LombokNoArgsConstructorAnnotationFeature</value>
+                                <value>LombokAllArgsConstructorAnnotationFeature</value>
+                                <value>LombokBuilderAnnotationFeature</value>
+                                <value>LombokDataAnnotationFeature</value>
+                                <value>DateFormatAnnotationFeature</value>
+                                <value>ConvertibleFeature</value>
+                                <value>SwaggerApiModelPropertyAnnotationFeature</value>
+                                <value>IdField2StringFeature</value>
+                                <value>-GetterSetterFeature</value>
+                                <value>-ClassCommentFeature</value>
+                                <value>com.github.hetianyi.plugin.template.config.ExcludeIdAndTimeFieldFeature</value>
+                                <value>com.github.hetianyi.plugin.template.config.SwaggerApiModelAnnotationFeature
+                                </value>
+                                <value>com.github.hetianyi.plugin.template.config.ClassCommentFeature</value>
+                                <!--<value>config.com.example.Slf4jFeature</value>-->
+                            </features>
+                            <ignorePrefixes>
+                                <value>t_</value>
+                                <value>_</value>
+                            </ignorePrefixes>
+                            <ignoreSuffixes>
+                                <value>_</value>
+                            </ignoreSuffixes>
+                        </profile>
+                        <profile>
+                            <name>update_form</name>
+                            <outputDir>./generated</outputDir>
+                            <packageName>com.github.hetianyi.plugin.template.model.form</packageName>
+                            <author>Jason He</author>
+                            <appendPrefix>Update</appendPrefix>
+                            <appendSuffix>Form</appendSuffix>
+                            <lineSeparator>CRLF</lineSeparator>
+                            <copyright>Copyright (c) 2022, Jason He. All rights reserved.</copyright>
+                            <includeTables>
+                                <!--<value>t_user</value>-->
+                            </includeTables>
+                            <features>
+                                <value>LombokNoArgsConstructorAnnotationFeature</value>
+                                <value>LombokAllArgsConstructorAnnotationFeature</value>
+                                <value>LombokBuilderAnnotationFeature</value>
+                                <value>LombokDataAnnotationFeature</value>
+                                <value>DateFormatAnnotationFeature</value>
+                                <value>ConvertibleFeature</value>
+                                <value>SwaggerApiModelPropertyAnnotationFeature</value>
+                                <value>IdField2StringFeature</value>
+                                <value>-GetterSetterFeature</value>
+                                <value>-ClassCommentFeature</value>
+                                <value>com.github.hetianyi.plugin.template.config.ExcludeTimeFieldFeature</value>
+                                <value>com.github.hetianyi.plugin.template.config.SwaggerApiModelAnnotationFeature
+                                </value>
+                                <value>com.github.hetianyi.plugin.template.config.ClassCommentFeature</value>
+                                <!--<value>config.com.example.Slf4jFeature</value>-->
+                            </features>
+                            <ignorePrefixes>
+                                <value>t_</value>
+                                <value>_</value>
+                            </ignorePrefixes>
+                            <ignoreSuffixes>
+                                <value>_</value>
+                            </ignoreSuffixes>
+                        </profile>
+                        <profile>
+                            <name>query_form</name>
+                            <outputDir>./generated</outputDir>
+                            <packageName>com.github.hetianyi.plugin.template.model.form</packageName>
+                            <author>Jason He</author>
+                            <appendPrefix>Query</appendPrefix>
+                            <appendSuffix>Form</appendSuffix>
+                            <lineSeparator>CRLF</lineSeparator>
+                            <copyright>Copyright (c) 2022, Jason He. All rights reserved.</copyright>
+                            <includeTables>
+                                <!--<value>t_user</value>-->
+                            </includeTables>
+                            <features>
+                                <value>LombokNoArgsConstructorAnnotationFeature</value>
+                                <value>LombokAllArgsConstructorAnnotationFeature</value>
+                                <value>LombokBuilderAnnotationFeature</value>
+                                <value>LombokDataAnnotationFeature</value>
+                                <value>DateFormatAnnotationFeature</value>
+                                <value>ConvertibleFeature</value>
+                                <value>SwaggerApiModelPropertyAnnotationFeature</value>
+                                <value>IdField2StringFeature</value>
+                                <value>-GetterSetterFeature</value>
+                                <value>-ClassCommentFeature</value>
+                                <value>com.github.hetianyi.plugin.template.config.SwaggerApiModelAnnotationFeature
+                                </value>
+                                <value>com.github.hetianyi.plugin.template.config.ClassCommentFeature</value>
+                                <value>com.github.hetianyi.plugin.template.config.AddTimeRangeFieldFeature</value>
+                                <value>com.github.hetianyi.plugin.template.config.AddPageableExtendFeature</value>
+                                <value>com.github.hetianyi.plugin.template.config.ExcludeTimeFieldFeature</value>
+                                <!--<value>config.com.example.Slf4jFeature</value>-->
+                            </features>
+                            <ignorePrefixes>
+                                <value>t_</value>
+                                <value>_</value>
+                            </ignorePrefixes>
+                            <ignoreSuffixes>
+                                <value>_</value>
+                            </ignoreSuffixes>
+                        </profile>
+                        <profile>
+                            <name>template</name>
+                            <mvcTemplateDir>./src/main</mvcTemplateDir>
+                            <includeTables>
+                                <!--<value>t_user</value>-->
+                            </includeTables>
+                            <excludeTables>
+                                <value>t_example</value>
+                                <value>t_doc_ext</value>
+                                <value>t_sys_config</value>
+                            </excludeTables>
+                            <features>
+                            </features>
+                            <ignorePrefixes>
+                                <value>t_</value>
+                                <value>_</value>
+                            </ignorePrefixes>
+                            <ignoreSuffixes>
+                                <value>_</value>
+                            </ignoreSuffixes>
+                        </profile>
+                    </profiles>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

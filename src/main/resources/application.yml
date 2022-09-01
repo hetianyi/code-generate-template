@@ -1,0 +1,92 @@
+server:
+  port: 8080
+spring:
+  application:
+    name: code-generate-template
+  profiles:
+    active: dev
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+springfox:
+  documentation:
+    swagger-ui:
+      base-url: /api/swagger
+    open-api:
+      v3:
+        path: /api/swagger/v3/api-docs
+logging :
+  level:
+    com.github.hetianyi.plugin.template.mapper: DEBUG
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    username: ${db_user:root}
+    password: ${db_password:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${db_host:127.0.0.1}:${db_port:3306}/${db_name:test}?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 50
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x' from dual
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 50
+
+
+
+# springboot ready 配置文件开始
+app:
+  name: ${spring.application.name}
+  home-base-url: http://localhost:${server.port}
+  # SwaggerUI配置
+  swagger:
+    # Swagger接口扫描的java包地址
+    base-package: com.github.hetianyi.plugin.template.controller
+    # SwaggerUI生效的spring配置
+    profiles:
+      - dev
+      - test
+    # 标题
+    title: "API Documentation"
+    # license
+    license:
+      name: N/A
+      url: N/A
+    # 说明
+    description: 接口文档
+    # 版本
+    version: ${app.version:0.0.1}
+    # 接口全局参数定义
+    protocols:
+      - http
+      - https
+    termsOfServiceUrl: N/A
+    contact:
+      name: Jason He
+      email: hehety@outlook.com
+      url: N/A
+    apiKey:
+      name: token
+      keyName: X-AUTH-TOKEN
+      passAs: header
+
+
+
+
+
+
+
+
