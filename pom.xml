@@ -151,7 +151,7 @@
                     <profiles>
                         <profile>
                             <name>po</name>
-                            <outputDir>./generated</outputDir>
+                            <outputDir>./src/main/java</outputDir>
                             <packageName>com.github.hetianyi.plugin.template.model.po</packageName>
                             <author>Jason He</author>
                             <appendSuffix>PO</appendSuffix>
@@ -180,7 +180,7 @@
                         </profile>
                         <profile>
                             <name>vo</name>
-                            <outputDir>./generated</outputDir>
+                            <outputDir>./src/main/java</outputDir>
                             <packageName>com.github.hetianyi.plugin.template.model.vo</packageName>
                             <author>Jason He</author>
                             <appendSuffix>VO</appendSuffix>
@@ -213,7 +213,7 @@
                         </profile>
                         <profile>
                             <name>create_form</name>
-                            <outputDir>./generated</outputDir>
+                            <outputDir>./src/main/java</outputDir>
                             <packageName>com.github.hetianyi.plugin.template.model.form</packageName>
                             <author>Jason He</author>
                             <appendPrefix>Create</appendPrefix>
@@ -250,7 +250,7 @@
                         </profile>
                         <profile>
                             <name>update_form</name>
-                            <outputDir>./generated</outputDir>
+                            <outputDir>./src/main/java</outputDir>
                             <packageName>com.github.hetianyi.plugin.template.model.form</packageName>
                             <author>Jason He</author>
                             <appendPrefix>Update</appendPrefix>
@@ -287,7 +287,7 @@
                         </profile>
                         <profile>
                             <name>query_form</name>
-                            <outputDir>./generated</outputDir>
+                            <outputDir>./src/main/java</outputDir>
                             <packageName>com.github.hetianyi.plugin.template.model.form</packageName>
                             <author>Jason He</author>
                             <appendPrefix>Query</appendPrefix>
